@@ -1,0 +1,28 @@
+#formTodo{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 3px solid #eee;
+}
+#formTodo input{
+    outline: none;
+    border-radius: 3px;
+    border: none;
+    padding:10px;
+    font-family: inherit;
+    font-size: 20px;
+    background-color: transparent;
+}
+#formTodo input::placeholder{
+    color: #fff;
+}
+#formTodo button{
+    width: 70px;
+    height: 35px;
+    color:#fff;
+    background-color: #555;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    cursor: pointer;
+}

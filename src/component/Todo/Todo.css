@@ -1,0 +1,26 @@
+.todo{
+    margin-top: .8rem;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 15px 20px; 
+    transform: scaleX(.95);
+    transition: .3s all;
+}
+.todo:hover{
+    transform: scaleX(1);
+}
+.todo:hover button{
+transform: scale(1.2);
+}
+.todo button{
+    color: red;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    transform: scale(0);
+    transition: .3s all ease;
+    cursor: pointer;
+}
