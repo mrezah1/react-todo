@@ -1,26 +1,45 @@
-.todo{
-    margin-top: .8rem;
-    background-color: #fff;
-    border-radius: 5px;
-    padding: 15px 20px; 
-    transform: scaleX(.95);
-    transition: .3s all;
+.todo {
+  margin-top: 0.8rem;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 10.5px 20px;
+  transform: scaleX(0.95);
+  transition: 0.3s all;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.todo:hover{
-    transform: scaleX(1);
+.todo:hover {
+  transform: scaleX(1);
 }
-.todo:hover button{
-transform: scale(1.2);
+.todo div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0;
+  transition: 0.3s all ease;
 }
-.todo button{
-    color: red;
-    float: right;
-    font-size: 20px;
-    font-weight: bold;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    transform: scale(0);
-    transition: .3s all ease;
-    cursor: pointer;
+.todo:hover div {
+  opacity: 1;
+}
+.todo button {
+  font-size: 27px;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  width: 25px;
+  height: 25px;
+  justify-content: center;  
+}
+.todo button:first-child {
+  color: #eb3528;
+  align-items: flex-end;
+  margin: 5px 6px 0 0;  
+}
+.todo button:last-child {
+  color: #17a860;
+  align-items: flex-end;
 }

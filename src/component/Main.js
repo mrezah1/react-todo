@@ -4,46 +4,54 @@ import Todo from './Todo/Todo'
 import './Main.css'
 
 const Main = (props) => {
-    const [todoSt, setTodo] = useState({
-        todos: [],
-        inputVal: ''
-    })
+    const [todos, setTodo] = useState([]);
+    const [inputVal, setInputVal] = useState('');
+
+    const changeValHandler = (event) => {
+        setInputVal(event.target.value)
+    }
     const addTodo = (e) => {
         e.preventDefault()
-        if (todoSt.inputVal.trim() !== '') {
-            const newState = { ...todoSt };
-            newState.todos.push(todoSt.inputVal);
-            newState.inputVal = "";
-            setTodo({ ...todoSt, ...newState });
+        if (inputVal.trim() !== '') {
+            const newState = [...todos];
+            newState.push({
+                title: inputVal,
+                isDone: false
+            });
+            setTodo(newState);
+            setInputVal('');
         }
     }
     const removeTodo = (id) => {
-        const newState = [...todoSt.todos];
+        const newState = [...todos];
         newState.splice(id, 1);
-        setTodo({ ...todoSt, todos: newState })
+        setTodo(newState);
     }
-    const changeValHandler = (event) => {
-        // this.setState({ inputVal: event.target.value })
-        setTodo({ ...todoSt, inputVal: event.target.value })
+    const doneTodoHandler = (id) => {
+        const newState = [...todos];
+        newState[id].isDone = !newState[id].isDone;
+        setTodo(newState);
     }
-
     return (
         <section className="main">
             <div className="wrapper-form">
                 <FromAdd
                     addTodo={addTodo}
-                    input={todoSt.inputVal}
+                    input={inputVal}
                     change={changeValHandler}
                 />
             </div>
             <ul className="wrapper-todo">
-                {todoSt.todos.length > 0 ?
-                    todoSt.todos.map((item, index) => (
-                        <Todo title={item}
+                {todos.length > 0 ?
+                    todos.map((item, index) => (
+                        <Todo
                             key={index}
-                            removeTodo={() => removeTodo(index)}
+                            title={item.title}
+                            isDone={item.isDone}
+                            remove={() => removeTodo(index)}
+                            done={() => doneTodoHandler(index)}
                         />))
-                    : <p style={{ textAlign: 'center' }}>Empty Todo!</p>}
+                    : <li style={{ textAlign: 'center' }}>Empty Todo!</li>}
             </ul>
         </section>
     )
