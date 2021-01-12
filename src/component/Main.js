@@ -22,17 +22,20 @@ const Main = (props) => {
             });
             setTodoAll(newState);
             setInputVal('');
+            localStorage.setItem('Todos', JSON.stringify(newState))
         }
     }
     const removeTodo = (id) => {
         let newState = [...todosAll].filter(item => item.id !== id);
         setTodoAll(newState);
+        localStorage.setItem('Todos', JSON.stringify(newState))
     }
     const doneTodoHandler = (id) => {
         const newState = [...todosAll];
         const indexDoneTodo = newState.findIndex(item => item.id === id);
         newState[indexDoneTodo].isDone = !newState[indexDoneTodo].isDone;
         setTodoAll(newState)
+        localStorage.setItem('Todos', JSON.stringify(newState))
     }
     const sortTodoHandler = () => {
         let newSort = [...todosShow];
@@ -60,6 +63,11 @@ const Main = (props) => {
         sortTodoHandler()
     }, [sortTodo])
 
+    useEffect(() => {
+        const todoItems = localStorage.getItem('Todos')||'[]';
+        // console.log(JSON.stringify(todoItems))
+        setTodoAll(JSON.parse(todoItems))
+    }, [])
     return (
         <section className="main">
             <FromAdd
