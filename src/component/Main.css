@@ -3,21 +3,3 @@
     font-family: "Fira Code","B Yekan Regular";    
     color: #222;    
 }
-.wrapper-todo{
-    margin-top: 1.5rem;
-    height: 400px;
-    overflow-y: auto; 
-    padding-right: .75rem; 
-}
-.wrapper-todo{
-    scrollbar-width: thin;
-    scrollbar-color:#666 transparent;
-  }
-  .wrapper-todo::-webkit-scrollbar{
-    background: transparent;
-    width: 4px;
-  }
-  .wrapper-todo::-webkit-scrollbar-thumb{
-    border-radius: 50rem;
-    background: #666;   
-  }

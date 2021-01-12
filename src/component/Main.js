@@ -1,58 +1,83 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import FromAdd from './FormAdd/FromAdd'
-import Todo from './Todo/Todo'
+import FormFilter from './FormFilter/FormFIlter'
+import Todos from './Todos/Todos'
 import './Main.css'
 
 const Main = (props) => {
-    const [todos, setTodo] = useState([]);
+    const [todosAll, setTodoAll] = useState([]);
+    const [todosShow, setTodoShow] = useState([]);
     const [inputVal, setInputVal] = useState('');
+    const [sortTodo, setSortTodo] = useState('All');
+    const [filterTodo, setFilterTodo] = useState('All');
 
-    const changeValHandler = (event) => {
-        setInputVal(event.target.value)
-    }
     const addTodo = (e) => {
         e.preventDefault()
         if (inputVal.trim() !== '') {
-            const newState = [...todos];
+            const newState = [...todosAll];
             newState.push({
+                id: Math.random() * 10,
                 title: inputVal,
-                isDone: false
+                isDone: false,
             });
-            setTodo(newState);
+            setTodoAll(newState);
             setInputVal('');
         }
     }
     const removeTodo = (id) => {
-        const newState = [...todos];
-        newState.splice(id, 1);
-        setTodo(newState);
+        let newState = [...todosAll].filter(item => item.id !== id);
+        setTodoAll(newState);
     }
     const doneTodoHandler = (id) => {
-        const newState = [...todos];
-        newState[id].isDone = !newState[id].isDone;
-        setTodo(newState);
+        const newState = [...todosAll];
+        const indexDoneTodo = newState.findIndex(item => item.id === id);
+        newState[indexDoneTodo].isDone = !newState[indexDoneTodo].isDone;
+        setTodoAll(newState)
     }
+    const sortTodoHandler = () => {
+        let newSort = [...todosShow];
+        if (sortTodo === "Compelete")
+            newSort = newSort.sort((a, b) => b.isDone - a.isDone);
+        else if (sortTodo === "UnCompelete")
+            newSort = newSort.sort((a, b) => a.isDone - b.isDone);
+        setTodoShow(newSort)
+    }
+    const filterTodoHandler = () => {
+        // default all todo
+        let newFilter = [...todosAll];
+        if (filterTodo === 'Compelete')
+            newFilter = todosAll.filter(item => item.isDone === true)
+        else if (filterTodo === 'UnCompelete')
+            newFilter = todosAll.filter(item => item.isDone === false)
+        setTodoShow(newFilter)
+    }
+
+    useEffect(() => {
+        filterTodoHandler();
+    }, [filterTodo, todosAll])
+
+    useEffect(() => {
+        sortTodoHandler()
+    }, [sortTodo])
+
     return (
         <section className="main">
-            <div className="wrapper-form">
-                <FromAdd
-                    addTodo={addTodo}
-                    input={inputVal}
-                    change={changeValHandler}
+            <FromAdd
+                addTodo={addTodo}
+                input={inputVal}
+                change={(e) => setInputVal(e.target.value)}
+            />
+            {todosAll.length > 6 && (
+                <FormFilter
+                    sort={(e) => setSortTodo(e.target.value)}
+                    filter={(e) => setFilterTodo(e.target.value)}
                 />
-            </div>
-            <ul className="wrapper-todo">
-                {todos.length > 0 ?
-                    todos.map((item, index) => (
-                        <Todo
-                            key={index}
-                            title={item.title}
-                            isDone={item.isDone}
-                            remove={() => removeTodo(index)}
-                            done={() => doneTodoHandler(index)}
-                        />))
-                    : <li style={{ textAlign: 'center' }}>Empty Todo!</li>}
-            </ul>
+            )}
+            <Todos
+                todos={todosShow}
+                remove={removeTodo}
+                done={doneTodoHandler}
+            />
         </section>
     )
 }

@@ -1,6 +1,5 @@
 .todo {
   margin-top: 0.8rem;
-  background-color: #fff;
   border-radius: 5px;
   padding: 10.5px 20px;
   transform: scaleX(0.95);
@@ -8,6 +7,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.active{
+  background-color: #fff;
+}
+.passive{
+  background-color:rgba(250,250 ,250, .55); 
 }
 .todo:hover {
   transform: scaleX(1);

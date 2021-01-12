@@ -6,7 +6,7 @@ const FromAdd = (props) => (
             value={props.input}
             onChange={props.change}
             type="text"
-            placeholder="Enter todo..." />
+            placeholder="Enter Todo..." />
         <button type="submit">✚</button>
     </form>
 )

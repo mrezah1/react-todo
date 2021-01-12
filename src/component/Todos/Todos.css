@@ -1,0 +1,18 @@
+.todo-list{
+    margin-top: 1.5rem;
+    height: 400px;
+    overflow-y: auto; 
+    padding-right: .75rem; 
+}
+.todo-list{
+    scrollbar-width: thin;
+    scrollbar-color:#666 transparent;
+  }
+  .todo-list::-webkit-scrollbar{
+    background: transparent;
+    width: 4px;
+  }
+  .todo-list::-webkit-scrollbar-thumb{
+    border-radius: 50rem;
+    background: #666;   
+  }
