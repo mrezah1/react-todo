@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0;
 }
+ul{
+ list-style:none 
+}
 .container {
   min-height: 100vh;
   width: 100%;
